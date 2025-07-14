@@ -1,156 +1,112 @@
-/**
- * Copyright (c) 2014 Microsoft Open Technologies, Inc.
+/*
+ *  Copyright (C) 2014. Mellanox Technologies, Ltd. ALL RIGHTS RESERVED.
  *
  *    Licensed under the Apache License, Version 2.0 (the "License"); you may
  *    not use this file except in compliance with the License. You may obtain
  *    a copy of the License at http://www.apache.org/licenses/LICENSE-2.0
  *
- *    THIS CODE IS PROVIDED ON AN *AS IS* BASIS, WITHOUT WARRANTIES OR
+ *    THIS CODE IS PROVIDED ON AN  *AS IS* BASIS, WITHOUT WARRANTIES OR
  *    CONDITIONS OF ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING WITHOUT
  *    LIMITATION ANY IMPLIED WARRANTIES OR CONDITIONS OF TITLE, FITNESS
- *    FOR A PARTICULAR PURPOSE, MERCHANTABILITY OR NON-INFRINGEMENT.
+ *    FOR A PARTICULAR PURPOSE, MERCHANTABLITY OR NON-INFRINGEMENT.
  *
  *    See the Apache Version 2.0 License for specific language governing
  *    permissions and limitations under the License.
- *
- *    Microsoft would like to thank the following companies for their review and
- *    assistance with these files: Intel Corporation, Mellanox Technologies Ltd,
- *    Dell Products, L.P., Facebook, Inc., Marvell International Ltd.
- *
- * @file    stub_sai_lag.c
- *
- * @brief   This module defines SAI LAG interface stubs
  */
 
-#include "sai_stub.h"
+#include "sai.h"
+#include "../inc/stub_sai.h"
+#include <assert.h>
+#include <stdio.h>
 
-/**
- * @brief Create LAG
- */
-static sai_status_t stub_create_lag(
-    _Out_ sai_object_id_t *lag_id,
-    _In_ sai_object_id_t switch_id,
+#undef  __MODULE__
+#define __MODULE__ SAI_LAG
+
+static int32_t next_lag_id = 1;
+static int32_t next_lag_member_id = 1;
+
+sai_status_t stub_create_lag(
+    _Out_ sai_object_id_t* lag_id,
     _In_ uint32_t attr_count,
-    _In_ const sai_attribute_t *attr_list)
+    _In_ sai_attribute_t *attr_list)
 {
-    STUB_LOG_ENTER();
+    sai_status_t status;
 
-    // TODO: Implement LAG creation logic
+    status = stub_create_object(SAI_OBJECT_TYPE_LAG, next_lag_id++, lag_id);
+    if (status != SAI_STATUS_SUCCESS) {
+        printf("Cannot create a LAG OID\n");
+        return status;
+    }
 
-    STUB_LOG_EXIT();
-    return SAI_STATUS_NOT_IMPLEMENTED;
+    printf("CREATE LAG: 0x%lX\n", *lag_id);
+    return SAI_STATUS_SUCCESS;
 }
 
-/**
- * @brief Remove LAG
- */
-static sai_status_t stub_remove_lag(
+sai_status_t stub_remove_lag(
     _In_ sai_object_id_t lag_id)
 {
-    STUB_LOG_ENTER();
-
-    // TODO: Implement LAG removal logic
-
-    STUB_LOG_EXIT();
-    return SAI_STATUS_NOT_IMPLEMENTED;
+    printf("REMOVE LAG: 0x%lX\n", lag_id);
+    return SAI_STATUS_SUCCESS;
 }
 
-/**
- * @brief Set LAG attribute
- */
-static sai_status_t stub_set_lag_attribute(
+sai_status_t stub_set_lag_attribute(
     _In_ sai_object_id_t lag_id,
     _In_ const sai_attribute_t *attr)
 {
-    STUB_LOG_ENTER();
-
-    // TODO: Implement LAG attribute setting logic
-
-    STUB_LOG_EXIT();
-    return SAI_STATUS_NOT_IMPLEMENTED;
+    printf("SET LAG ATTRIBUTE called\n");
+    return SAI_STATUS_SUCCESS;
 }
 
-/**
- * @brief Get LAG attribute
- */
-static sai_status_t stub_get_lag_attribute(
+sai_status_t stub_get_lag_attribute(
     _In_ sai_object_id_t lag_id,
     _In_ uint32_t attr_count,
     _Inout_ sai_attribute_t *attr_list)
 {
-    STUB_LOG_ENTER();
-
-    // TODO: Implement LAG attribute getting logic
-
-    STUB_LOG_EXIT();
-    return SAI_STATUS_NOT_IMPLEMENTED;
+    printf("GET LAG ATTRIBUTE called\n");
+    return SAI_STATUS_SUCCESS;
 }
 
-/**
- * @brief Create LAG member
- */
-static sai_status_t stub_create_lag_member(
-    _Out_ sai_object_id_t *lag_member_id,
-    _In_ sai_object_id_t switch_id,
+sai_status_t stub_create_lag_member(
+    _Out_ sai_object_id_t* lag_member_id,
     _In_ uint32_t attr_count,
-    _In_ const sai_attribute_t *attr_list)
+    _In_ sai_attribute_t *attr_list)
 {
-    STUB_LOG_ENTER();
+    sai_status_t status;
 
-    // TODO: Implement LAG member creation logic
+    status = stub_create_object(SAI_OBJECT_TYPE_LAG_MEMBER, next_lag_member_id++, lag_member_id);
+    if (status != SAI_STATUS_SUCCESS) {
+        printf("Cannot create a LAG MEMBER OID\n");
+        return status;
+    }
 
-    STUB_LOG_EXIT();
-    return SAI_STATUS_NOT_IMPLEMENTED;
+    printf("CREATE LAG_MEMBER: 0x%lX\n", *lag_member_id);
+    return SAI_STATUS_SUCCESS;
 }
 
-/**
- * @brief Remove LAG member
- */
-static sai_status_t stub_remove_lag_member(
+sai_status_t stub_remove_lag_member(
     _In_ sai_object_id_t lag_member_id)
 {
-    STUB_LOG_ENTER();
-
-    // TODO: Implement LAG member removal logic
-
-    STUB_LOG_EXIT();
-    return SAI_STATUS_NOT_IMPLEMENTED;
+    printf("REMOVE LAG_MEMBER: 0x%lX\n", lag_member_id);
+    return SAI_STATUS_SUCCESS;
 }
 
-/**
- * @brief Set LAG member attribute
- */
-static sai_status_t stub_set_lag_member_attribute(
+sai_status_t stub_set_lag_member_attribute(
     _In_ sai_object_id_t lag_member_id,
     _In_ const sai_attribute_t *attr)
 {
-    STUB_LOG_ENTER();
-
-    // TODO: Implement LAG member attribute setting logic
-
-    STUB_LOG_EXIT();
-    return SAI_STATUS_NOT_IMPLEMENTED;
+    printf("SET LAG MEMBER ATTRIBUTE called\n");
+    return SAI_STATUS_SUCCESS;
 }
 
-/**
- * @brief Get LAG member attribute
- */
-static sai_status_t stub_get_lag_member_attribute(
+sai_status_t stub_get_lag_member_attribute(
     _In_ sai_object_id_t lag_member_id,
     _In_ uint32_t attr_count,
     _Inout_ sai_attribute_t *attr_list)
 {
-    STUB_LOG_ENTER();
-
-    // TODO: Implement LAG member attribute getting logic
-
-    STUB_LOG_EXIT();
-    return SAI_STATUS_NOT_IMPLEMENTED;
+    printf("GET LAG MEMBER ATTRIBUTE called\n");
+    return SAI_STATUS_SUCCESS;
 }
 
-/**
- * @brief LAG methods table retrieved with sai_api_query()
- */
 const sai_lag_api_t lag_api = {
     stub_create_lag,
     stub_remove_lag,

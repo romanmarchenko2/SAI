@@ -17,6 +17,7 @@ lib_LTLIBRARIES = libsai.la
 libsai_la_SOURCES = \
                        stub_sai_fdb.c \
                        stub_sai_interfacequery.c \
+                       stub_sai_lag.c \
                        stub_sai_neighbor.c \
                        stub_sai_nexthop.c \
                        stub_sai_nexthopgroup.c \
@@ -28,7 +29,6 @@ libsai_la_SOURCES = \
                        stub_sai_vlan.c \
                        stub_sai_rif.c \
                        stub_sai_host_interface.c
-                       stub_sai_lag.c
 libsai_la_LIBADD =
 
 libsai_apiincludedir = $(includedir)/sai
